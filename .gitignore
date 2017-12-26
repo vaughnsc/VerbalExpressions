@@ -1,0 +1,6 @@
+.DS_Store
+*.xojo_uistate
+*.app
+AllDirectionsCursor.pdf
+*.xojo_code.obsolete*
+*.xojo_*.obsolete_*
