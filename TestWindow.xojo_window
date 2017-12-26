@@ -9,7 +9,7 @@ Begin Window TestWindow
    FullScreen      =   False
    FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   400
+   Height          =   290
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
@@ -23,7 +23,7 @@ Begin Window TestWindow
    MinWidth        =   64
    Placement       =   0
    Resizeable      =   True
-   Title           =   "Untitled"
+   Title           =   "VerbEx Tests"
    Visible         =   True
    Width           =   600
    Begin TextField SampleField
@@ -43,7 +43,7 @@ Begin Window TestWindow
       HelpTag         =   ""
       Index           =   -2147483648
       Italic          =   False
-      Left            =   57
+      Left            =   39
       LimitText       =   0
       LockBottom      =   False
       LockedInPosition=   False
@@ -62,18 +62,18 @@ Begin Window TestWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   20
+      Top             =   41
       Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
-      Width           =   500
+      Width           =   522
    End
    Begin PushButton TestButton
       AutoDeactivate  =   True
       Bold            =   False
       ButtonStyle     =   "0"
       Cancel          =   False
-      Caption         =   "Search"
+      Caption         =   "Test"
       Default         =   False
       Enabled         =   True
       Height          =   20
@@ -81,12 +81,12 @@ Begin Window TestWindow
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   394
-      LockBottom      =   False
+      Left            =   398
+      LockBottom      =   True
       LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   False
-      LockTop         =   True
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
       Scope           =   0
       TabIndex        =   1
       TabPanelIndex   =   0
@@ -94,7 +94,7 @@ Begin Window TestWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   360
+      Top             =   250
       Underline       =   False
       Visible         =   True
       Width           =   163
@@ -102,14 +102,14 @@ Begin Window TestWindow
    Begin GroupBox GroupBox1
       AutoDeactivate  =   True
       Bold            =   False
-      Caption         =   "Samples"
+      Caption         =   "Sample VerbEx"
       Enabled         =   True
-      Height          =   247
+      Height          =   143
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
       Italic          =   False
-      Left            =   57
+      Left            =   39
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
@@ -122,22 +122,22 @@ Begin Window TestWindow
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   67
+      Top             =   88
       Underline       =   False
       Visible         =   True
-      Width           =   500
+      Width           =   522
       Begin RadioButton btnHttpTest
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "HTTP URL"
          Enabled         =   True
-         Height          =   24
+         Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
          InitialParent   =   "GroupBox1"
          Italic          =   False
-         Left            =   77
-         LockBottom      =   True
+         Left            =   51
+         LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   True
@@ -149,24 +149,24 @@ Begin Window TestWindow
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   95
+         Top             =   124
          Underline       =   False
          Value           =   False
          Visible         =   True
-         Width           =   460
+         Width           =   482
       End
       Begin RadioButton btnMailTest
          AutoDeactivate  =   True
          Bold            =   False
-         Caption         =   "Email Link/Address"
+         Caption         =   "Email URI/Address"
          Enabled         =   True
-         Height          =   24
+         Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
          InitialParent   =   "GroupBox1"
          Italic          =   False
-         Left            =   77
-         LockBottom      =   True
+         Left            =   51
+         LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   True
@@ -178,24 +178,24 @@ Begin Window TestWindow
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   124
+         Top             =   156
          Underline       =   False
          Value           =   False
          Visible         =   True
-         Width           =   460
+         Width           =   482
       End
       Begin RadioButton btnDOStest
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "DOS Filename"
          Enabled         =   True
-         Height          =   24
+         Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
          InitialParent   =   "GroupBox1"
          Italic          =   False
-         Left            =   77
-         LockBottom      =   True
+         Left            =   51
+         LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
          LockRight       =   True
@@ -207,54 +207,47 @@ Begin Window TestWindow
          TextFont        =   "System"
          TextSize        =   0.0
          TextUnit        =   0
-         Top             =   151
+         Top             =   188
          Underline       =   False
          Value           =   False
          Visible         =   True
-         Width           =   460
+         Width           =   482
       End
    End
-   Begin TextField CurrentPattern
-      AcceptTabs      =   False
-      Alignment       =   0
+   Begin Label Label1
       AutoDeactivate  =   True
-      AutomaticallyCheckSpelling=   False
-      BackColor       =   &cFFFFFF00
       Bold            =   False
-      Border          =   True
-      CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
-      Format          =   ""
-      Height          =   22
+      Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
+      InitialParent   =   ""
       Italic          =   False
-      Left            =   57
-      LimitText       =   0
+      Left            =   39
       LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
       LockTop         =   True
-      Mask            =   ""
-      Password        =   False
-      ReadOnly        =   False
+      Multiline       =   False
       Scope           =   0
+      Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   ""
+      Text            =   "Sample Text"
+      TextAlign       =   0
       TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0
-      Top             =   326
+      Top             =   14
+      Transparent     =   False
       Underline       =   False
-      UseFocusRing    =   True
       Visible         =   True
-      Width           =   500
+      Width           =   184
    End
 End
 #tag EndWindow
@@ -271,10 +264,10 @@ End
 	#tag Event
 		Sub Action()
 		  
-		  if currentTest<>nil and currentTest.Matches(TextField1.text) then
-		    MsgBox "'"+TextField1.Text+"' matches "+ currentTest.ToString
+		  if currentTest<>nil and currentTest.Matches(SampleField.text) then
+		    MsgBox "'"+SampleField.Text+"' matches "+ currentTest.ToString
 		  else
-		    MsgBox "'"+TextField1.Text+"' doesnt match "+ currentTest.ToString
+		    MsgBox "'"+SampleField.Text+"' doesnt match "+ currentTest.ToString
 		  end
 		End Sub
 	#tag EndEvent
@@ -283,16 +276,16 @@ End
 	#tag Event
 		Sub Action()
 		  currentTest=new VerbEx
-		  currentTest=currentTest.StartOfLine.AndThen("http").Maybe("s").AndThen("://")_
+		  currentTest=currentTest.StartOfLine.Then_("http").Maybe("s").Then_("://")_
 		  .Maybe("www").AnythingBut(" ").EndOfLine
 		  
-		  CurrentPattern.Text=currentTest
+		  'CurrentPattern.Text=currentTest
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
 		  dim myVerbex as new VerbEx
-		  me.HelpTag=myVerbex.StartOfLine.AndThen("http").Maybe("s").AndThen("://")_
+		  me.HelpTag=myVerbex.StartOfLine.Then_("http").Maybe("s").Then_("://")_
 		  .Maybe("www").AnythingBut(" ").EndOfLine
 		  
 		End Sub
@@ -304,31 +297,36 @@ End
 		  currentTest=new VerbEx
 		  
 		  currentTest=currentTest.StartOfLine.Maybe("mailto:").Maybe("?To=").AnythingBut(" ")_
-		  .AndThen("@").AnythingBut(" ").AndThen(".").AnythingBut(" ").EndOfLine
+		  .Then_("@").AnythingBut(" ").Then_(".").AnythingBut(" ").EndOfLine
 		  
-		  CurrentPattern.Text=currentTest
+		  'CurrentPattern.Text=currentTest
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
 		  dim myVerbex as new VerbEx
 		  me.HelpTag=myVerbex.StartOfLine.Maybe("mailto:").Maybe("?To=").AnythingBut(" ")_
-		  .AndThen("@").AnythingBut(" ").AndThen(".").AnythingBut(" ").EndOfLine
+		  .Then_("@").AnythingBut(" ").Then_(".").AnythingBut(" ").EndOfLine
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnDOStest
 	#tag Event
 		Sub Action()
+		  currentTest=new VerbEx
+		  currentTest=currentTest.StartOfLine._
+		  AnythingBut("\").Multiple(1,8).Then_(".")._
+		  AnythingBut("/").Multiple(1,3).EndOfLine
 		  
+		  'CurrentPattern.Text=currentTest
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
 		  dim myVerbex as new VerbEx
 		  me.HelpTag=myVerbex.StartOfLine._
-		  AnythingBut("\").Multiple(1,8).AndThen(".")._
-		  AnythingBut("/").Multiple(1,3).EndOfLine
+		  AnythingBut("\").Multiple(1,8).Then_(".")._
+		  AnythingBut("\").Multiple(1,3).EndOfLine
 		  
 		End Sub
 	#tag EndEvent

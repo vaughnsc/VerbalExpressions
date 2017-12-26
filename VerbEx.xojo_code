@@ -1,8 +1,15 @@
 #tag Class
 Protected Class VerbEx
 Inherits RegEx
+Implements VerbalExpressionsInterface
 	#tag Method, Flags = &h21
-		Private Function Add(value as String) As VerbEx
+		Private Function Add(value as Variant) As VerbEx
+		  if value.IsNull or value.StringValue="" Then
+		    dim err as new UnsupportedOperationException
+		    err.Message="Add(value) cannot be empty"
+		    raise err
+		  end
+		  
 		  me.SearchPattern=me.SearchPattern+value
 		  return me
 		End Function
@@ -33,13 +40,19 @@ Inherits RegEx
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function br() As String
+		Function br() As VerbEx
 		  return me.LineBreak
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function EndCapture() As String
+		Function digit() As VerbEx
+		  return me.add(DigitToken)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function EndCapture() As VerbEx
 		  return me.Add(")")
 		End Function
 	#tag EndMethod
@@ -73,7 +86,8 @@ Inherits RegEx
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function LineBreak() As String
+		Function LineBreak() As VerbEx
+		  //this may be academic, as RegExOptions.LineEndType defaults to any ending
 		  return me.add("(?:(?:\n)|(?:\r\n))")
 		End Function
 	#tag EndMethod
@@ -97,11 +111,30 @@ Inherits RegEx
 
 	#tag Method, Flags = &h0
 		Function Multiple(paramarray counts as variant) As VerbEx
-		  dim result as string
+		  //should allow [value][exact|min][max]
+		  
+		  dim value as Variant=nil
+		  dim suffix as String="*"
+		  
+		  try
+		    value=counts(0)
+		  catch OutOfBoundsException
+		    return me.Add(suffix) //applies to previous item
+		  end
+		  
+		  if value.Type=Variant.TypeString then
+		    value="["+Sanitize(value)+"]"
+		    counts.remove(0)
+		  end
+		  
+		  //treat anything else as numeric
+		  
 		  for each number as Variant in counts
-		    result=result+","+str(number.IntegerValue)
+		    suffix=suffix+","+str(number.IntegerValue)
 		  next
-		  return me.Add(result.Replace(",","{")+"}")
+		  suffix=suffix.Replace("*","").replace(",","{")+"}"
+		  
+		  return me.Add(value+suffix)
 		End Function
 	#tag EndMethod
 
@@ -124,9 +157,14 @@ Inherits RegEx
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Replaced()
-		  //Return replaced string
-		End Sub
+		Function Replaced(value as String) As String
+		  if me.SearchPattern.Len>0 then
+		    
+		    return me.Replace
+		    
+		    
+		  end
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -142,56 +180,65 @@ Inherits RegEx
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub searchOneLine(value as boolean)
+		Function searchOneLine(value as boolean) As VerbEx
 		  me.Options.TreatTargetAsOneLine=not value
-		End Sub
+		  
+		  return me
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Something() As String
+		Function Something() As VerbEx
 		  return me.add("(?:.+)")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SomethingBut(value as String) As String
+		Function SomethingBut(value as String) As VerbEx
 		  return me.add("(?:[^" + Sanitize(value) + "]+)")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function StartCapture() As String
+		Function StartCapture() As Verbex
 		  return me.add("(")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function StartOfLine() As VerbEx
-		  me.SearchPattern="^"+me.SearchPattern
-		  Return me
+		  'me.SearchPattern="^"+me.SearchPattern
+		  Return me.Add("^")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function StartsWith(value as String) As VerbEx
+		Attributes( Convenience )  Function StartsWith(value as String) As VerbEx
 		  return me.Add(StartOfLine).add(Sanitize(value))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub StopAtFirst(value as Boolean)
+		Function StopAtFirst(value as Boolean) As VerbEx
 		  me.Options.Greedy=not value
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function tab() As String
-		  return "\t"
+		  
+		  exit
+		  
+		  //second option after subexpression (toggle)
+		  if value<>me.Options.Greedy then
+		    return me.add("?")
+		  end
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Attributes( Alias = "then" )  Function Then_(value as Variant) As Verbex
+		Function tab() As VerbEx
+		  return me.add(TabToken)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Attributes( Alias = "Then" )  Function Then_(value as Variant) As Verbex
 		  return me.add(Sanitize(value))
 		End Function
 	#tag EndMethod
@@ -203,20 +250,21 @@ Inherits RegEx
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function whitespace() As String
-		  return "\\s"
+		Function Whitespace() As VerbEx
+		  return me.add(WhitespaceToken)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub withAnyCase(value as Boolean=true)
+		Function withAnyCase(value as Boolean = true) As VerbEx
 		  me.Options.CaseSensitive=not value
-		End Sub
+		  return me
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Word() As String
-		  return  "\w+"
+		Function Word() As VerbEx
+		  return me.Add(WordToken)
 		End Function
 	#tag EndMethod
 
@@ -232,6 +280,25 @@ Inherits RegEx
 	#tag Property, Flags = &h0
 		suffixes As String
 	#tag EndProperty
+
+
+	#tag Constant, Name = CarriageReturnToken, Type = String, Dynamic = False, Default = \"\\r", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = DigitToken, Type = String, Dynamic = False, Default = \"\\d", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = LineFeedToken, Type = String, Dynamic = False, Default = \"\\n", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = TabToken, Type = String, Dynamic = False, Default = \"\\t", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = WhitespaceToken, Type = String, Dynamic = False, Default = \"\\s", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = WordToken, Type = String, Dynamic = False, Default = \"\\w+", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior
