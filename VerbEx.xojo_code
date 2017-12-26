@@ -2,11 +2,13 @@
 Protected Class VerbEx
 Inherits RegEx
 Implements VerbalExpressionsInterface
-	#tag Method, Flags = &h21
+	#tag Method, Flags = &h21, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
 		Private Function Add(value as Variant) As VerbEx
+		  //some implementations accept Add() to 'recompile' the expression
+		  
 		  if value.IsNull or value.StringValue="" Then
 		    dim err as new UnsupportedOperationException
-		    err.Message="Add(value) cannot be empty"
+		    err.Message="Add requires a value"
 		    raise err
 		  end
 		  
@@ -46,7 +48,7 @@ Implements VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function digit() As VerbEx
+		Function Digit() As VerbEx
 		  return me.add(DigitToken)
 		End Function
 	#tag EndMethod
@@ -139,7 +141,7 @@ Implements VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function oneOrMore(value as string) As VerbEx
+		Function OneOrMore(value as string) As VerbEx
 		  return me.Add("["+Sanitize(value)+"]+")
 		End Function
 	#tag EndMethod
@@ -157,12 +159,15 @@ Implements VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Replaced(value as String) As String
+		Function Replace(source as string, value as String) As String
+		  // Per example at https://github.com/VerbalExpressions/PHPVerbalExpressions/wiki/.then(-value-)
+		  dim limit as Boolean=me.Options.ReplaceAllMatches
 		  if me.SearchPattern.Len>0 then
-		    
-		    return me.Replace
-		    
-		    
+		    me.Options.ReplaceAllMatches=true
+		    me.ReplacementPattern=Sanitize(value)
+		    dim result as string=me.Replace(source)
+		    me.Options.ReplaceAllMatches=limit
+		    return result
 		  end
 		End Function
 	#tag EndMethod

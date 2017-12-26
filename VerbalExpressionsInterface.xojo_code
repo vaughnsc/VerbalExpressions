@@ -1,31 +1,32 @@
 #tag Interface
-Protected Interface VerbalExpressionsInterface
-	#tag Method, Flags = &h0
-		Function Add(value as Variant) As VerbalExpressionsInterface
+ Attributes ( Reference = "https://github.com/VerbalExpressions/implementation/wiki/List-of-methods-to-implement" ) Protected Interface VerbalExpressionsInterface
+	#tag CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
+		Function add(value as Variant) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Any(value as String) As VerbalExpressionsInterface
+		Function any(value as String) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function AnyOf(value as String) As VerbalExpressionsInterface
+		Function anyOf(value as String) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Anything() As VerbalExpressionsInterface
+		Function anything() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function AnythingBut(value as string) As VerbalExpressionsInterface
+		Function anythingBut(value as string) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
@@ -37,43 +38,37 @@ Protected Interface VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function digit() As VerbalExpressionsInterface
+		Function endCapture() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function EndCapture() As VerbalExpressionsInterface
+		Function endOfLine() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function EndOfLine() As VerbalExpressionsInterface
+		Function find(value as String) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Find(value as String) As VerbalExpressionsInterface
+		Function lineBreak() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function LineBreak() As VerbalExpressionsInterface
+		Function maybe(value as String) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Maybe(value as String) As VerbalExpressionsInterface
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function Multiple(paramarray counts as variant) As VerbalExpressionsInterface
+		Function multiple(paramarray counts as variant) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
@@ -85,13 +80,13 @@ Protected Interface VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Or_(value as string) As VerbalExpressionsInterface
+		Attributes( alias = "or" )  Function or_(value as string) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Replaced(value as String) As String
+		Function replace(source as string, value as String) As String
 		  
 		End Function
 	#tag EndMethod
@@ -103,31 +98,31 @@ Protected Interface VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Something() As VerbalExpressionsInterface
+		Function something() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SomethingBut(value as String) As VerbalExpressionsInterface
+		Function somethingBut(value as String) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function StartCapture() As VerbalExpressionsInterface
+		Function startCapture() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function StartOfLine() As VerbalExpressionsInterface
+		Function startOfLine() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function StopAtFirst(value as Boolean) As VerbalExpressionsInterface
+		Function stopAtFirst(value as Boolean) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
@@ -139,13 +134,13 @@ Protected Interface VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Then_(value as Variant) As VerbalExpressionsInterface
+		Attributes( alias = "Then" )  Function then_(value as Variant) As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Whitespace() As VerbalExpressionsInterface
+		Function whitespace() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod
@@ -157,7 +152,7 @@ Protected Interface VerbalExpressionsInterface
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Word() As VerbalExpressionsInterface
+		Function word() As VerbalExpressionsInterface
 		  
 		End Function
 	#tag EndMethod

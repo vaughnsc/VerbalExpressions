@@ -99,7 +99,7 @@ Begin Window TestWindow
       Visible         =   True
       Width           =   163
    End
-   Begin GroupBox GroupBox1
+   Begin GroupBox TestsGroup
       AutoDeactivate  =   True
       Bold            =   False
       Caption         =   "Sample VerbEx"
@@ -126,7 +126,7 @@ Begin Window TestWindow
       Underline       =   False
       Visible         =   True
       Width           =   522
-      Begin RadioButton btnHttpTest
+      Begin VerbexButton btnHttpTest
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "HTTP URL"
@@ -134,7 +134,7 @@ Begin Window TestWindow
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
-         InitialParent   =   "GroupBox1"
+         InitialParent   =   "TestsGroup"
          Italic          =   False
          Left            =   51
          LockBottom      =   False
@@ -155,7 +155,7 @@ Begin Window TestWindow
          Visible         =   True
          Width           =   482
       End
-      Begin RadioButton btnMailTest
+      Begin VerbexButton btnMailTest
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "Email URI/Address"
@@ -163,7 +163,7 @@ Begin Window TestWindow
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
-         InitialParent   =   "GroupBox1"
+         InitialParent   =   "TestsGroup"
          Italic          =   False
          Left            =   51
          LockBottom      =   False
@@ -184,7 +184,7 @@ Begin Window TestWindow
          Visible         =   True
          Width           =   482
       End
-      Begin RadioButton btnDOStest
+      Begin VerbexButton btnDOStest
          AutoDeactivate  =   True
          Bold            =   False
          Caption         =   "DOS Filename"
@@ -192,7 +192,7 @@ Begin Window TestWindow
          Height          =   20
          HelpTag         =   ""
          Index           =   -2147483648
-         InitialParent   =   "GroupBox1"
+         InitialParent   =   "TestsGroup"
          Italic          =   False
          Left            =   51
          LockBottom      =   False
@@ -236,7 +236,6 @@ Begin Window TestWindow
       Selectable      =   False
       TabIndex        =   3
       TabPanelIndex   =   0
-      TabStop         =   True
       Text            =   "Sample Text"
       TextAlign       =   0
       TextColor       =   &c00000000
@@ -253,8 +252,8 @@ End
 #tag EndWindow
 
 #tag WindowCode
-	#tag Property, Flags = &h0
-		currentTest As VerbEx
+	#tag Property, Flags = &h21
+		Private currentTest As VerbEx
 	#tag EndProperty
 
 
@@ -263,6 +262,8 @@ End
 #tag Events TestButton
 	#tag Event
 		Sub Action()
+		  
+		  
 		  
 		  if currentTest<>nil and currentTest.Matches(SampleField.text) then
 		    MsgBox "'"+SampleField.Text+"' matches "+ currentTest.ToString
@@ -275,18 +276,18 @@ End
 #tag Events btnHttpTest
 	#tag Event
 		Sub Action()
-		  currentTest=new VerbEx
-		  currentTest=currentTest.StartOfLine.Then_("http").Maybe("s").Then_("://")_
-		  .Maybe("www").AnythingBut(" ").EndOfLine
-		  
-		  'CurrentPattern.Text=currentTest
+		  currentTest=me.Expression
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
-		  dim myVerbex as new VerbEx
-		  me.HelpTag=myVerbex.StartOfLine.Then_("http").Maybe("s").Then_("://")_
+		  me.Expression=new VerbEx
+		  
+		  me.Expression=me.Expression.StartOfLine.Then_("http").Maybe("s").Then_("://")_
 		  .Maybe("www").AnythingBut(" ").EndOfLine
+		  
+		  me.HelpTag=me.Expression //tooltip shows searchPattern
+		  
 		  
 		End Sub
 	#tag EndEvent
@@ -294,39 +295,36 @@ End
 #tag Events btnMailTest
 	#tag Event
 		Sub Action()
-		  currentTest=new VerbEx
-		  
-		  currentTest=currentTest.StartOfLine.Maybe("mailto:").Maybe("?To=").AnythingBut(" ")_
-		  .Then_("@").AnythingBut(" ").Then_(".").AnythingBut(" ").EndOfLine
-		  
-		  'CurrentPattern.Text=currentTest
+		  currentTest=me.Expression
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
-		  dim myVerbex as new VerbEx
-		  me.HelpTag=myVerbex.StartOfLine.Maybe("mailto:").Maybe("?To=").AnythingBut(" ")_
+		  me.Expression=new VerbEx
+		  
+		  me.Expression=me.Expression.StartOfLine.Maybe("mailto:").Maybe("?To=").AnythingBut(" ")_
 		  .Then_("@").AnythingBut(" ").Then_(".").AnythingBut(" ").EndOfLine
+		  
+		  me.HelpTag=me.Expression
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btnDOStest
 	#tag Event
 		Sub Action()
-		  currentTest=new VerbEx
-		  currentTest=currentTest.StartOfLine._
-		  AnythingBut("\").Multiple(1,8).Then_(".")._
-		  AnythingBut("/").Multiple(1,3).EndOfLine
-		  
-		  'CurrentPattern.Text=currentTest
+		  currentTest=me.Expression
 		End Sub
 	#tag EndEvent
 	#tag Event
 		Sub Open()
-		  dim myVerbex as new VerbEx
-		  me.HelpTag=myVerbex.StartOfLine._
+		  me.Expression=new VerbEx
+		  me.Expression=me.Expression.StartOfLine._
 		  AnythingBut("\").Multiple(1,8).Then_(".")._
 		  AnythingBut("\").Multiple(1,3).EndOfLine
+		  
+		  me.HelpTag=me.Expression //tooltip shows searchPattern
 		  
 		End Sub
 	#tag EndEvent
