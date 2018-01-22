@@ -319,6 +319,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Open()
+		  //simple test just checks for 8.3
+		  
 		  me.Expression=new VerbEx
 		  me.Expression=me.Expression.StartOfLine._
 		  AnythingBut("\").Multiple(1,8).Then_(".")._
