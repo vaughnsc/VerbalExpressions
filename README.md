@@ -1,6 +1,6 @@
 # XojoVerbalExpressions
 My implementation to https://github.com/VerbalExpressions
-Done sone time ago, I reached out to include at the meain site; haven't heard back :)
+Done some time ago, I reached out to include at the main site but haven't heard back :)
 
 ***
 
@@ -12,7 +12,7 @@ Please keep this note in the class and append any modifications separately.
 
 Xojo implmentation of VerbalExpressions, originally described at:
 https://github.com/VerbalExpressions/implementation/wiki/List-of-methods-to-implement
-Required methods noted in VerbalExpressionsInterface.
+These required methods are documented in VerbalExpressionsInterface.
 
 Note that **Then** and **Or** are Xojo reserved words: **Then_** and **Or_** are used instead.
 
@@ -30,7 +30,7 @@ combining 'StartOfLine' and 'Then(value)'
 
 "Matches" is a convenience method that returns a Variant, which can be used as Boolean or to get the actual number of matches:
 ```
-If verbex.matches then...
+If verbex.matches then
   Select case verbex.Matches
   Case 1
   …
@@ -39,13 +39,13 @@ If verbex.matches then...
   End
 End
 ```
-VerbEx also exposes Regex.SearchPattern with both `VerbEx.ToString` and `VerbEx.Operator_Convert As String` if you want to access the 'built' regular expression. In the first example above, we could add:
+VerbEx also exposes Regex.SearchPattern with both `VerbEx.ToString` and as `VerbEx.Operator_Convert As String` if you want to access the 'built' regular expression. In the 'http' example above, we could add:
 ```
 dim test as string=me.expression 
-//string value is "^http(?:s)?\://(?:www)?(?:[^ ]*)$"
+//test's value is "^http(?:s)?\://(?:www)?(?:[^ ]*)$"
 ```
 
-In the sample app, this is used to show the radio button tooltips.
+In the included sample project, this is used to show the app's radio button tooltips.
 
 N.B. It does not output RegExOptions prefixes/suffixes in the built string.
 
