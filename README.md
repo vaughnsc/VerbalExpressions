@@ -39,8 +39,14 @@ If verbex.matches then...
   End
 End
 ```
-VerbEx also exposes Regex.SearchPattern with both VerbEx.ToString and VerbEx.Operator_Convert As String if you want to access the 'built' regular expression.
-In the sample, this is used to show the radio button tooltips.
+VerbEx also exposes Regex.SearchPattern with both `VerbEx.ToString` and `VerbEx.Operator_Convert As String` if you want to access the 'built' regular expression. In the first example above, we could add:
+```
+dim test as string=me.expression 
+//string value is "^http(?:s)?\://(?:www)?(?:[^ ]*)$"
+```
+
+In the sample app, this is used to show the radio button tooltips.
+
 N.B. It does not output RegExOptions prefixes/suffixes in the built string.
 
 A simple app with three test scenarios was included with this class.
